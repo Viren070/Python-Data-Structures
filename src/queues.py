@@ -29,7 +29,7 @@ class Queue:
     def __init__(self, max_size):
         self.type = None
         self.max_size = max_size
-        self.queue = [None for item in range(self.max_size)] # initialise array with size of max_size
+        self.queue = [None]*max_size # initialise array with size of max_size
         self.front = 0
         self.rear = -1
 
@@ -156,7 +156,6 @@ class CircularQueue(Queue):
     def __init__(self, max_size):
         super().__init__(max_size)
         self.type = "Circular"
-        self.queue = [None for x in range(max_size)]
         self.rear = -1
         self.front = -1
 
