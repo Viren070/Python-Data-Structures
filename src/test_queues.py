@@ -9,7 +9,10 @@ Author: Viren070 on GitHub
 import queues
 
 
-def get_integer_within_limits(text, lower_limit=None, upper_limit=None):
+def get_integer_within_limits(text: str, 
+                              lower_limit:int | None=None,
+                              upper_limit:int | None=None
+                              ) -> int:
     '''
     Obtain an integer input within optional limits.
 
