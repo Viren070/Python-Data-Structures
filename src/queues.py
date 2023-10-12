@@ -23,6 +23,7 @@ class Queue:
     Methods:
     - __init__(self, max_size: int): Initializes a new Queue with the specified maximum size.
     - display_queue(self): Displays the current status of the queue.
+    - size(self) -> bool: Returns the current size of the queue
     - is_full(self) -> bool: Checks if the queue is full.
     - is_empty(self) -> bool: Checks if the queue is empty.
     """
@@ -35,15 +36,24 @@ class Queue:
 
     def display_queue(self):
         '''Display the queue status'''
-        print(f"\nQueue Type: {self.type}\nQueue Array: {self.queue}\nFront: {self.front}\nRear: {self.rear}\nIs Full: {self.is_full()}\nIs Empty: {self.is_empty()}\n")
+        print(f"\nQueue Type: {self.type}\nQueue Array: {self.queue}\nFront Index: {self.front}\nRear Index: {self.rear}\nItem at front: {self.peek()}\nCurrent Queue Size: {self.size()}\nIs Full: {self.is_full()}\nIs Empty: {self.is_empty()}\n")
 
     def is_full(self) -> bool:
         ''' Return whether the queue is full or not'''
         return self.rear + 1 == self.max_size
 
     def is_empty(self) -> bool:
-        '''Retrun True if queue is empty and False if not'''
+        '''Return True if queue is empty and False if not'''
         return self.front > self.rear
+
+    def peek(self) -> str:
+        '''Return the item at the front of the queue without removing it, or None if queue is empty'''
+        return None if self.is_empty() else self.queue[self.front]
+
+    def size(self) -> int:
+        """Return the number of items currently in the queue"""
+        return 0 if self.is_empty() else (self.rear - self.front ) + 1
+
 
 class LinearQueue(Queue):
     """
@@ -59,6 +69,8 @@ class LinearQueue(Queue):
     - __init__(self, max_size: int): Initializes a new LinearQueue with the specified maximum size.
     - is_empty(self) -> bool: Checks if the queue is empty.
     - is_full(self) -> bool: Checks if the queue is full.
+    - size(self) -> bool: Returns the current size of the queue
+    - peek(self): Returns the item at the front of the queue, or None if empty
     - enqueue(self, item): Adds an item to the rear of the queue.
     - dequeue(self): Removes and returns the item from the front of the queue.
 
@@ -108,6 +120,8 @@ class IsaacsLinearQueue(LinearQueue):
     - __init__(self, max_size: int): Initializes a new LinearQueue with the specified maximum size.
     - is_empty(self) -> bool: Checks if the queue is empty.
     - is_full(self) -> bool: Checks if the queue is full.
+    - size(self) -> bool: Returns the current size of the queue
+    - peek(self): Returns the item at the front of the queue or None if empty
     - enqueue(self, item): Adds an item to the rear of the queue.
     - dequeue(self): Removes and returns the item from the front of the queue.
 
@@ -145,6 +159,8 @@ class CircularQueue(Queue):
     - display_queue(self): Displays the current status of the circular queue.
     - is_full(self) -> bool: Returns True if the queue is full; otherwise, returns False.
     - is_empty(self) -> bool: Returns True if the queue is empty; otherwise, returns False.
+    - size(self) -> bool: Returns the current size of the queue
+    - peek(self): Returns the item at the front of the queue or None if empty
     - enqueue(self, item_to_add) -> bool: Adds an item to the end of the circular queue. Returns True on success, False if the queue is full.
     - dequeue(self): Removes and returns an item from the circular queue. Returns None if the queue is empty.
 
@@ -187,3 +203,15 @@ class CircularQueue(Queue):
         else:
             self.front = (self.front+1) % self.max_size
         return dequeued_item
+    def size(self) -> int:
+        '''
+        Returns the current size of the queue
+        Note: Modified size function to work with circular queues
+        '''
+        if self.is_empty():
+            return 0
+
+        if self.is_full():
+            return self.max_size
+        
+        return ((self.rear - self.front) + 1 ) % self.max_size
