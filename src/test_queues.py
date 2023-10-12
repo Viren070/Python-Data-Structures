@@ -8,8 +8,7 @@ Author: Viren070 on GitHub
 
 import queues
 
-
-def get_integer_within_limits(text: str, 
+def get_integer_within_limits(text: str,
                               lower_limit:int | None=None,
                               upper_limit:int | None=None
                               ) -> int:
@@ -70,7 +69,7 @@ def run_queue_menu(queue):
     while queue is not None:
         # menu for dequeuing and enqueuing
         queue.display_queue()
-        user_choice = input("\nQueue Options:\n1 - Enqueue\n2 - Dequeue\n3 - Back to Main Menu\n: > ")
+        user_choice = input("\nQueue Options:\n1 - Enqueue\n2 - Dequeue\n3 - Clear Queue\n4 - Back to Main Menu\n: > ")
 
         if user_choice == "1":  # handle enqueue
             data = input("\nWhat do you want to enqueue? > ")
@@ -85,12 +84,13 @@ def run_queue_menu(queue):
                 print("\nThere was nothing to dequeue; the queue is empty.")
             else:
                 print(f"\n{dequeue_result} was removed from the queue")
-
-        elif user_choice == "3":  # handle exit
+        elif user_choice == "3": # handle clear queue
+            queue.clear()
+        elif user_choice == "4":  # handle exit
             queue = None
         else:  # handle other inputs
             print("\nInvalid choice")
-        if user_choice != "3":  # don't show this message if the user wants to exit
+        if user_choice != "4":  # don't show this message if the user wants to exit
             input("\nPress enter to continue....")
 
 if __name__ == "__main__":
