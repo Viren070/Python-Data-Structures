@@ -215,14 +215,6 @@ class CircularQueue(Queue):
             return self._max_size
         return ((self._rear - self._front) + 1 ) % self._max_size
 
-
-
-
-
-
-
-#fffffffffffffffffffffffffffffffffffffff
-
     def clear(self):
         self._queue = [None] * self._max_size
         self._front = -1
