@@ -29,30 +29,30 @@ class Queue:
     """
     def __init__(self, max_size):
         self.type = None
-        self.max_size = max_size
-        self.queue = [None]*max_size # initialise array with size of max_size
-        self.front = 0
-        self.rear = -1
+        self._max_size = max_size
+        self._queue = [None]*max_size # initialise array with size of max_size
+        self._front = 0
+        self._rear = -1
 
     def display_queue(self):
         '''Display the queue status'''
-        print(f"\nQueue Type: {self.type}\nQueue Array: {self.queue}\nFront Index: {self.front}\nRear Index: {self.rear}\nItem at front: {self.peek()}\nCurrent Queue Size: {self.size()}\nIs Full: {self.is_full()}\nIs Empty: {self.is_empty()}\n")
+        print(f"\nQueue Type: {self.type}\nQueue Array: {self._queue}\nFront Index: {self._front}\nRear Index: {self._rear}\nItem at front: {self.peek()}\nCurrent Queue Size: {self.size()}\nIs Full: {self.is_full()}\nIs Empty: {self.is_empty()}\n")
 
     def is_full(self) -> bool:
         ''' Return whether the queue is full or not'''
-        return self.rear + 1 == self.max_size
+        return self._rear + 1 == self._max_size
 
     def is_empty(self) -> bool:
         '''Return True if queue is empty and False if not'''
-        return self.front > self.rear
+        return self._front > self._rear
 
     def peek(self) -> str:
         '''Return the item at the front of the queue without removing it, or None if queue is empty'''
-        return None if self.is_empty() else self.queue[self.front]
+        return None if self.is_empty() else self._queue[self._front]
 
     def size(self) -> int:
         """Return the number of items currently in the queue"""
-        return 0 if self.is_empty() else (self.rear - self.front ) + 1
+        return 0 if self.is_empty() else (self._rear - self._front ) + 1
 
 
 class LinearQueue(Queue):
@@ -87,22 +87,22 @@ class LinearQueue(Queue):
         '''Add an item to the queue'''
         if self.is_full():
             return False
-        self.rear += 1
-        self.queue[self.rear] = item_to_add
+        self._rear += 1
+        self._queue[self._rear] = item_to_add
         return True
 
     def dequeue(self):
-        '''Remove an item from the front of the queue'''
+        '''Remove an item from the front of the queue and shift all items left'''
         if self.is_empty():
             return None
 
-        dequeued_item = self.queue[self.front]
-        self.front += 1
-        if self.front != 0:
-            for _ in range(self.front): # shift each item until the front index is 0
-                self.queue[:] = self.queue[1:] + [None] # add None to end of list after shifting each item to the left.
-            self.rear = self.rear - self.front # new rear would be the number of times shifted subtracted from old rear.
-            self.front = 0
+        dequeued_item = self._queue[self._front]
+        self._front += 1
+        if self._front != 0:
+            for _ in range(self._front): # shift each item until the front index is 0
+                self._queue[:] = self._queue[1:] + [None] # add None to end of list after shifting each item to the left.
+            self._rear = self._rear - self._front # new rear would be the number of times shifted subtracted from old rear.
+            self._front = 0
         return dequeued_item
 
 class IsaacsLinearQueue(LinearQueue):
@@ -140,8 +140,8 @@ class IsaacsLinearQueue(LinearQueue):
         if self.is_empty():
             return None
 
-        dequeued_item = self.queue[self.front]
-        self.front += 1
+        dequeued_item = self._queue[self._front]
+        self._front += 1
         return dequeued_item
 
 class CircularQueue(Queue):
@@ -172,46 +172,41 @@ class CircularQueue(Queue):
     def __init__(self, max_size):
         super().__init__(max_size)
         self.type = "Circular"
-        self.rear = -1
-        self.front = -1
+        self._rear = -1
+        self._front = -1
 
     def is_full(self):
-        '''Return True if queue is full else False'''
-        return (self.rear + 1) % self.max_size == self.front
+        return (self._rear + 1) % self._max_size == self._front
 
     def is_empty(self):
-        '''Return True if the queue is empty, else return False'''
-        return self.front == -1
+        return self._front == -1
 
     def enqueue(self, item_to_add):
         '''Add an item to the end of the queue'''
         if self.is_full():
             return False
-        self.rear = (self.rear + 1) % self.max_size
-        self.queue[self.rear] = item_to_add
-        self.front = 0 if self.front == -1 else self.front
+        self._rear = (self._rear + 1) % self._max_size
+        self._queue[self._rear] = item_to_add
+        self._front = 0 if self._front == -1 else self._front
         return True
 
     def dequeue(self):
         '''Remove an item from the queue'''
         if self.is_empty():
             return None
-        dequeued_item = self.queue[self.front]
-        if self.front == self.rear:
-            self.front = -1
-            self.rear = -1
+        dequeued_item = self._queue[self._front]
+        if self._front == self._rear:
+            self._front = -1
+            self._rear = -1
         else:
-            self.front = (self.front+1) % self.max_size
+            self._front = (self._front+1) % self._max_size
         return dequeued_item
+
     def size(self) -> int:
-        '''
-        Returns the current size of the queue
-        Note: Modified size function to work with circular queues
-        '''
         if self.is_empty():
             return 0
-
         if self.is_full():
-            return self.max_size
-        
-        return ((self.rear - self.front) + 1 ) % self.max_size
+            return self._max_size
+        return ((self._rear - self._front) + 1 ) % self._max_size
+
+
