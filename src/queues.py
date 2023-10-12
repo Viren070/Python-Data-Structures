@@ -53,6 +53,12 @@ class Queue:
     def size(self) -> int:
         """Return the number of items currently in the queue"""
         return 0 if self.is_empty() else (self._rear - self._front ) + 1
+    
+    def clear(self):
+        '''Clears the queue by resetting the array'''
+        self._queue = [None] * self._max_size
+        self._front = 0
+        self._rear = -1
 
 
 class LinearQueue(Queue):
@@ -210,3 +216,14 @@ class CircularQueue(Queue):
         return ((self._rear - self._front) + 1 ) % self._max_size
 
 
+
+
+
+
+
+#fffffffffffffffffffffffffffffffffffffff
+
+    def clear(self):
+        self._queue = [None] * self._max_size
+        self._front = -1
+        self._rear = -1
