@@ -6,7 +6,12 @@ This program allows users to interact with different types of queues, including 
 Author: Viren070 on GitHub
 """
 
-import queues
+import structures.queues as queues 
+
+from structures.linked_lists import LinkedList
+from structures.stacks import Stack 
+
+
 
 def get_integer_within_limits(text: str,
                               lower_limit:int | None=None,
@@ -92,15 +97,74 @@ def run_queue_menu(queue):
             print("\nInvalid choice")
         if user_choice != "4":  # don't show this message if the user wants to exit
             input("\nPress enter to continue....")
+def run_stack_menu(stack):
+    
+    while stack is not None:
+        # menu for dequeuing and enqueuing
+        
+        stack.traverse_nodes()
+        user_choice = input("\nLinked List Options:\n1 - Push item\n2 - Pop Item\n3 - Peek\n4 - Back to Main Menu\n: > ")
+
+        if user_choice == "1":  
+            data_to_add = input("\nEnter data to add for new node: ")
+            stack.push(data_to_add)
+        elif user_choice == "2":  
+            popped = stack.pop()
+            if popped:
+                print(f"\n{popped} was popped from the stack")
+            else:
+                print("\nNothing to pop")
+        elif user_choice == "3": 
+            print(stack.peek())
+        elif user_choice == "4":  # handle exit
+            stack = None
+        else:  # handle other inputs
+            print("\nInvalid choice")
+        if user_choice != "4":  # don't show this message if the user wants to exit
+            input("\nPress enter to continue....")
+    
+def run_linked_list_menu(linked_list):
+
+    while linked_list is not None:
+        # menu for dequeuing and enqueuing
+        
+        linked_list.traverse_nodes()
+        user_choice = input("\nLinked List Options:\n1 - Add Node at front\n2 - Add Node in ascending order\n3 - Delete Node\n4 - Back to Main Menu\n: > ")
+
+        if user_choice == "1":  
+            data_to_add = input("\nEnter data to add for new node: ")
+            linked_list.add_node_at_front(data_to_add)
+        elif user_choice == "2":  
+            data_to_add = input("\nEnter data to add for new node in order: ")
+            linked_list.add_node_in_order(data_to_add)
+        elif user_choice == "3": # handle clear queue
+            data_to_delete = input("\nEnter data to remove from list: ")
+            result = linked_list.delete(data_to_add)
+            if result:
+                print(f"\n{data_to_delete} was removed from the linked list")
+            else:
+                print(f"\n{data_to_delete} was not found or an error was encountered")
+        elif user_choice == "4":  # handle exit
+            linked_list = None
+        else:  # handle other inputs
+            print("\nInvalid choice")
+        if user_choice != "4":  # don't show this message if the user wants to exit
+            input("\nPress enter to continue....")
+
 
 if __name__ == "__main__":
-    print("Welcome to the Queue System. You can choose from 2 queueing methods. Namely: Linear and Circular.")
-    print("Isaac's Linear Queue will not shift all items to the left in the case of a dequeue.")
+    print("Welcome to the Python Data Structure System. ")
     while True:
-        menu_choice = input("\nMain Menu:\n1 - Start\n2 - Exit\n: > ")
-        if menu_choice == "2":
-            break
-        if menu_choice != "1":
-            print("\nInvalid Choice.\n")
-        else:
-            run_queue_menu(initialise_queue())
+        menu_choice = input("\nMain Menu:\n1 - Queue System\n2 - Linked Lists\n3 - Stacks\n4 - Exit\n : > ")
+        match menu_choice:
+            case "1":
+                run_queue_menu(initialise_queue())
+            case "2":
+                run_linked_list_menu(LinkedList())
+            case "3":
+                run_stack_menu(Stack())
+            case "4":
+                break 
+            case _:
+                print("\nInvalid Choice")
+            
