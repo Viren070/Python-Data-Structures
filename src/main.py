@@ -32,10 +32,10 @@ def get_integer_within_limits(text: str,
     while integer is None:
         try:
             integer = int(input(text))
-            if lower_limit is not None and integer < lower_limit:
+            if lower_limit is not None and integer <= lower_limit:
                 print(f"\nYou must enter a number greater than {lower_limit}")
                 integer = None
-            elif upper_limit is not None and integer > upper_limit:
+            elif upper_limit is not None and integer >= upper_limit:
                 print(f"\nYou must enter a number lower than {upper_limit}")
                 integer = None
         except ValueError:
