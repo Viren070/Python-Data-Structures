@@ -1,8 +1,7 @@
 """
 Queue Classes
 
-This module contains implementations of various queue types, including a generic Queue, LinearQueue,
-IsaacsLinearQueue, and CircularQueue.
+This module contains implementations of various queue types, LinearQueue and CircularQueue.
 
 Author: Viren070 on GitHub
 """
@@ -11,7 +10,7 @@ from typing import Union
 
 class Queue:
     """
-    A generic queue class.
+    A base queue class.
 
     Attributes:
     - type (str): The type of the queue.
@@ -109,45 +108,6 @@ class LinearQueue(Queue):
                 self._queue[:] = self._queue[1:] + [None] # add None to end of list after shifting each item to the left.
             self._rear = self._rear - self._front # new rear would be the number of times shifted subtracted from old rear.
             self._front = 0
-        return dequeued_item
-
-class IsaacsLinearQueue(LinearQueue):
-    """
-    A simplified implementation of a Linear Queue, using Isacc Computer Science examples. Read the note for why this is incorrect.
-
-    Attributes:
-    - type (str): The type of the queue, set to "Linear".
-    - max_size (int): The maximum capacity of the queue.
-    - queue (list): The list representing the linear queue.
-    - front (int): The index pointing to the front of the queue.
-    - rear (int): The index pointing to the back of the queue
-
-    Methods:
-    - __init__(self, max_size: int): Initializes a new LinearQueue with the specified maximum size.
-    - is_empty(self) -> bool: Checks if the queue is empty.
-    - is_full(self) -> bool: Checks if the queue is full.
-    - size(self) -> bool: Returns the current size of the queue
-    - peek(self): Returns the item at the front of the queue or None if empty
-    - enqueue(self, item): Adds an item to the rear of the queue.
-    - dequeue(self): Removes and returns the item from the front of the queue.
-
-    Note:
-    This implementation follows **MOST** principles of a linear queue, where elements are added at the rear
-    and removed from the front. When the queue is full, enqueue operations will be rejected.
-    Dequeue operations **DO NOT** shift all remaining elements to the left. 
-    """
-    def  __init__(self, max_size):
-        super().__init__(max_size)
-        self.type = "Isaac's Linear"
-
-
-    def dequeue(self) -> Union[str, None]:
-        '''Remove an item from the front of the queue'''
-        if self.is_empty():
-            return None
-
-        dequeued_item = self._queue[self._front]
-        self._front += 1
         return dequeued_item
 
 class CircularQueue(Queue):

@@ -47,19 +47,17 @@ def initialise_queue():
     Initialize a queue based on user input for the maximum size and type of queue.
 
     Returns:
-    LinearQueue or IsaacsLinearQueue or CircularQueue: The initialized queue based on user input.
+    LinearQueue or CircularQueue: The initialized queue based on user input.
     '''
     queue = None
     max_queue_size = get_integer_within_limits("\nEnter the maximum size of the queue: > ", 0)
     while queue is None:
-        queue_option = input("\nWhat queue do you wish to use? \n1 - Linear Queue\n2 - Circular Queue\n3 - Isaac's Linear Queue\n: > ")
+        queue_option = input("\nWhat queue do you wish to use? \n1 - Linear Queue\n2 - Circular Queue\n: > ")
 
         if queue_option == "1":
             queue = queues.LinearQueue(max_queue_size)
         elif queue_option == "2":
             queue = queues.CircularQueue(max_queue_size)
-        elif queue_option == "3":
-            queue = queues.IsaacsLinearQueue(max_queue_size)
         else:
             print("\nInvalid Choice.\n")
     return queue
@@ -69,7 +67,7 @@ def run_queue_menu(queue):
     Run the menu for interacting with the given queue.
 
     Parameters:
-    - queue (LinearQueue or IsaacsLinearQueue or CircularQueue): The queue to interact with.
+    - queue (LinearQueue or CircularQueue): The queue to interact with.
     '''
     while queue is not None:
         # menu for dequeuing and enqueuing
@@ -103,7 +101,7 @@ def run_stack_menu(stack):
 
         stack_list = stack.get_list()
         print("=======================LIST====================")
-        print(*stack_list, sep=",")
+        print(*stack_list, sep=" | ")
         print("===============================================")
         user_choice = input("\nLinked List Options:\n1 - Push item\n2 - Pop Item\n3 - Peek\n4 - Back to Main Menu\n: > ")
         match user_choice:
@@ -135,7 +133,7 @@ def run_linked_list_menu(linked_list):
         # menu for dequeuing and enqueuing
         linked_list_array = linked_list.get_list()
         print("=======================LIST====================")
-        print(*linked_list_array, sep=",")
+        print(*linked_list_array, sep=" | ")
         print("===============================================")
         user_choice = input("\nLinked List Options:\n1 - Add Node at front\n2 - Add Node in ascending order\n3 - Delete Node\n4 - Back to Main Menu\n: > ")
 
