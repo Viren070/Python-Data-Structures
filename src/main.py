@@ -1,7 +1,7 @@
 """
-Queue System
+Data Structures
 
-This program allows users to interact with different types of queues, including Linear Queue, Isaac's Linear Queue, and Circular Queue.
+This program allows users to interact with different types of data structures, including queues and linked lists.
 
 Author: Viren070 on GitHub
 """
@@ -165,9 +165,10 @@ def run_linked_list_menu(linked_list):
 
 
 if __name__ == "__main__":
-    print("Welcome to the Python Data Structure System. ")
+    print("Welcome to the Python Data Structure Testing Environment. ")
+    print("Please choose which data structure you would like to use.")
     while True:
-        menu_choice = input("\nMain Menu:\n1 - Queue System\n2 - Linked Lists\n3 - Stacks\n4 - Exit\n : > ")
+        menu_choice = input("\nMain Menu:\n1 - Queues\n2 - Linked Lists\n3 - Stacks\n4 - Exit\n : > ")
         match menu_choice:
             case "1":
                 run_queue_menu(initialise_queue())
