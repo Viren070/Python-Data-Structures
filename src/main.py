@@ -6,10 +6,10 @@ This program allows users to interact with different types of queues, including 
 Author: Viren070 on GitHub
 """
 
-import structures.queues as queues 
+import structures.queues as queues
 
 from structures.linked_lists import LinkedList
-from structures.stacks import Stack 
+from structures.stacks import Stack
 
 
 
@@ -95,43 +95,48 @@ def run_queue_menu(queue):
                 queue = None
             case _:  # handle other inputs
                 print("\nInvalid choice")
-                
-        if user_choice != "4":  # don't show this message if the user wants to exit
+        if user_choice != "4":
             input("\nPress enter to continue....")
 def run_stack_menu(stack):
-    
     while stack is not None:
         # menu for dequeuing and enqueuing
-        
-        stack.traverse_nodes()
+
+        stack_list = stack.get_list()
+        print("=======================LIST====================")
+        print(*stack_list, sep=",")
+        print("===============================================")
         user_choice = input("\nLinked List Options:\n1 - Push item\n2 - Pop Item\n3 - Peek\n4 - Back to Main Menu\n: > ")
         match user_choice:
-            case "1":  
+            case "1":
                 data_to_add = input("\nEnter data to add for new node: ")
                 stack.push(data_to_add)
-            case "2":  
+            case "2":
                 popped = stack.pop()
                 if popped:
                     print(f"\n{popped} was popped from the stack")
                 else:
                     print("\nNothing to pop")
-            case "3": 
-                print(stack.peek())
+            case "3":
+                peek_result = stack.peek()
+                if peek_result:
+                    print(f"\nItem at top of stock {peek_result}")
+                else:
+                    print("\nThe stack is empty, nothing at top of stack")
             case "4":  # handle exit
                 stack = None
             case _:  # handle other inputs
                 print("\nInvalid choice")
-                
-        input("\nPress enter to continue....") if user_choice != "4" else None
-    
-            
-    
+
+        _ = input("\nPress enter to continue....") if user_choice != "4" else None
+
 def run_linked_list_menu(linked_list):
 
     while linked_list is not None:
         # menu for dequeuing and enqueuing
-        
-        linked_list.traverse_nodes()
+        linked_list_array = linked_list.get_list()
+        print("=======================LIST====================")
+        print(*linked_list_array, sep=",")
+        print("===============================================")
         user_choice = input("\nLinked List Options:\n1 - Add Node at front\n2 - Add Node in ascending order\n3 - Delete Node\n4 - Back to Main Menu\n: > ")
 
         match user_choice:
@@ -139,7 +144,7 @@ def run_linked_list_menu(linked_list):
                 data_to_add = input("\nEnter data to add for new node: ")
                 linked_list.add_node_at_front(data_to_add)
                 print(f"\n{data_to_add} was added to the linked list")
-            case "2":  
+            case "2":
                 data_to_add = input("\nEnter data to add for new node in order: ")
                 linked_list.add_node_in_order(data_to_add)
                 print(f"\n{data_to_add} was added to the linked list in ascending order")
@@ -154,7 +159,7 @@ def run_linked_list_menu(linked_list):
                 linked_list = None
             case _:  # handle other inputs
                 print("\nInvalid choice")
-                
+
         if user_choice != "4":  # don't show this message if the user wants to exit
             input("\nPress enter to continue....")
 
@@ -171,7 +176,6 @@ if __name__ == "__main__":
             case "3":
                 run_stack_menu(Stack())
             case "4":
-                break 
+                break
             case _:
                 print("\nInvalid Choice")
-            
