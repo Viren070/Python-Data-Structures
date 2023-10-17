@@ -75,26 +75,27 @@ def run_queue_menu(queue):
         # menu for dequeuing and enqueuing
         queue.display_queue()
         user_choice = input("\nQueue Options:\n1 - Enqueue\n2 - Dequeue\n3 - Clear Queue\n4 - Back to Main Menu\n: > ")
+        match user_choice:
+            case "1":  # handle enqueue
+                data = input("\nWhat do you want to enqueue? > ")
+                if queue.enqueue(data):
+                    print(f"\n{data} was added to the queue")
+                else:
+                    print(f"\nThe queue is full. {data} was not added to the queue")
 
-        if user_choice == "1":  # handle enqueue
-            data = input("\nWhat do you want to enqueue? > ")
-            if queue.enqueue(data):
-                print(f"\n{data} was added to the queue")
-            else:
-                print(f"\nThe queue is full. {data} was not added to the queue")
-
-        elif user_choice == "2":  # handle dequeue
-            dequeue_result = queue.dequeue()
-            if dequeue_result is None:
-                print("\nThere was nothing to dequeue; the queue is empty.")
-            else:
-                print(f"\n{dequeue_result} was removed from the queue")
-        elif user_choice == "3": # handle clear queue
-            queue.clear()
-        elif user_choice == "4":  # handle exit
-            queue = None
-        else:  # handle other inputs
-            print("\nInvalid choice")
+            case "2":  # handle dequeue
+                dequeue_result = queue.dequeue()
+                if dequeue_result is None:
+                    print("\nThere was nothing to dequeue; the queue is empty.")
+                else:
+                    print(f"\n{dequeue_result} was removed from the queue")
+            case "3": # handle clear queue
+                queue.clear()
+            case "4":  # handle exit
+                queue = None
+            case _:  # handle other inputs
+                print("\nInvalid choice")
+                
         if user_choice != "4":  # don't show this message if the user wants to exit
             input("\nPress enter to continue....")
 def run_stack_menu(stack):
@@ -104,24 +105,26 @@ def run_stack_menu(stack):
         
         stack.traverse_nodes()
         user_choice = input("\nLinked List Options:\n1 - Push item\n2 - Pop Item\n3 - Peek\n4 - Back to Main Menu\n: > ")
-
-        if user_choice == "1":  
-            data_to_add = input("\nEnter data to add for new node: ")
-            stack.push(data_to_add)
-        elif user_choice == "2":  
-            popped = stack.pop()
-            if popped:
-                print(f"\n{popped} was popped from the stack")
-            else:
-                print("\nNothing to pop")
-        elif user_choice == "3": 
-            print(stack.peek())
-        elif user_choice == "4":  # handle exit
-            stack = None
-        else:  # handle other inputs
-            print("\nInvalid choice")
-        if user_choice != "4":  # don't show this message if the user wants to exit
-            input("\nPress enter to continue....")
+        match user_choice:
+            case "1":  
+                data_to_add = input("\nEnter data to add for new node: ")
+                stack.push(data_to_add)
+            case "2":  
+                popped = stack.pop()
+                if popped:
+                    print(f"\n{popped} was popped from the stack")
+                else:
+                    print("\nNothing to pop")
+            case "3": 
+                print(stack.peek())
+            case "4":  # handle exit
+                stack = None
+            case _:  # handle other inputs
+                print("\nInvalid choice")
+                
+        input("\nPress enter to continue....") if user_choice != "4" else None
+    
+            
     
 def run_linked_list_menu(linked_list):
 
@@ -131,23 +134,27 @@ def run_linked_list_menu(linked_list):
         linked_list.traverse_nodes()
         user_choice = input("\nLinked List Options:\n1 - Add Node at front\n2 - Add Node in ascending order\n3 - Delete Node\n4 - Back to Main Menu\n: > ")
 
-        if user_choice == "1":  
-            data_to_add = input("\nEnter data to add for new node: ")
-            linked_list.add_node_at_front(data_to_add)
-        elif user_choice == "2":  
-            data_to_add = input("\nEnter data to add for new node in order: ")
-            linked_list.add_node_in_order(data_to_add)
-        elif user_choice == "3": # handle clear queue
-            data_to_delete = input("\nEnter data to remove from list: ")
-            result = linked_list.delete(data_to_add)
-            if result:
-                print(f"\n{data_to_delete} was removed from the linked list")
-            else:
-                print(f"\n{data_to_delete} was not found or an error was encountered")
-        elif user_choice == "4":  # handle exit
-            linked_list = None
-        else:  # handle other inputs
-            print("\nInvalid choice")
+        match user_choice:
+            case "1":
+                data_to_add = input("\nEnter data to add for new node: ")
+                linked_list.add_node_at_front(data_to_add)
+                print(f"\n{data_to_add} was added to the linked list")
+            case "2":  
+                data_to_add = input("\nEnter data to add for new node in order: ")
+                linked_list.add_node_in_order(data_to_add)
+                print(f"\n{data_to_add} was added to the linked list in ascending order")
+            case "3": # handle clear queue
+                data_to_delete = input("\nEnter data to remove from list: ")
+                result = linked_list.delete(data_to_delete)
+                if result:
+                    print(f"\n{data_to_delete} was removed from the linked list")
+                else:
+                    print(f"\n{data_to_delete} was not found in the linked list")
+            case "4":  # handle exit
+                linked_list = None
+            case _:  # handle other inputs
+                print("\nInvalid choice")
+                
         if user_choice != "4":  # don't show this message if the user wants to exit
             input("\nPress enter to continue....")
 
