@@ -103,7 +103,7 @@ def run_stack_menu(stack):
         print("=======================LIST====================")
         print(*stack_list, sep=" | ")
         print("===============================================")
-        user_choice = input("\nLinked List Options:\n1 - Push item\n2 - Pop Item\n3 - Peek\n4 - Back to Main Menu\n: > ")
+        user_choice = input("\nStack Options:\n1 - Push item\n2 - Pop Item\n3 - Peek\n4 - Back to Main Menu\n: > ")
         match user_choice:
             case "1":
                 data_to_add = input("\nEnter data to add for new node: ")
