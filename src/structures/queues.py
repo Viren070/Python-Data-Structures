@@ -46,7 +46,7 @@ class Queue:
         '''Return True if queue is empty and False if not'''
         return self._front > self._rear
 
-    def peek(self) -> str:
+    def peek(self) ->  Union[str, None]:
         '''Return the item at the front of the queue without removing it, or None if queue is empty'''
         return None if self.is_empty() else self._queue[self._front]
 
