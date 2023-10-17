@@ -53,13 +53,13 @@ def initialise_queue():
     max_queue_size = get_integer_within_limits("\nEnter the maximum size of the queue: > ", 0)
     while queue is None:
         queue_option = input("\nWhat queue do you wish to use? \n1 - Linear Queue\n2 - Circular Queue\n: > ")
-
-        if queue_option == "1":
-            queue = queues.LinearQueue(max_queue_size)
-        elif queue_option == "2":
-            queue = queues.CircularQueue(max_queue_size)
-        else:
-            print("\nInvalid Choice.\n")
+        match queue_option:
+            case "1":
+                queue = queues.LinearQueue(max_queue_size)
+            case "2":
+                queue = queues.CircularQueue(max_queue_size)
+            case _:
+                print("\nInvalid Choice.\n")
     return queue
 
 def run_queue_menu(queue):
