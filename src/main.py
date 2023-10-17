@@ -52,7 +52,7 @@ def initialise_queue():
     queue = None
     max_queue_size = get_integer_within_limits("\nEnter the maximum size of the queue: > ", 0)
     while queue is None:
-        queue_option = input("\nWhat queue do you wish to use? \n1 - Linear Queue\n2 - Circular Queue\n3 - Isaac Linear Queue\n: > ")
+        queue_option = input("\nWhat queue do you wish to use? \n1 - Linear Queue\n2 - Circular Queue\n3 - Isaac's Linear Queue\n: > ")
 
         if queue_option == "1":
             queue = queues.LinearQueue(max_queue_size)
