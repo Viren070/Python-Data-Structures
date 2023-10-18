@@ -110,7 +110,7 @@ def run_stack_menu(stack):
                 stack.push(data_to_add)
             case "2":
                 popped = stack.pop()
-                if popped:
+                if popped is not False:
                     print(f"\n{popped} was popped from the stack")
                 else:
                     print("\nNothing to pop")
