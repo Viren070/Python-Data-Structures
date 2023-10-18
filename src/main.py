@@ -6,10 +6,10 @@ This program allows users to interact with different types of data structures, i
 Author: Viren070 on GitHub
 """
 from typing import Union
-import structures.queues as queues
+import Structures.queues as queues
 
-from structures.linked_lists import LinkedList
-from structures.stacks import Stack
+from Structures.linked_lists import LinkedList
+from Structures.stacks import Stack
 
 
 
