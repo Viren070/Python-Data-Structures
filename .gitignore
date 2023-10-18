@@ -1,2 +1,7 @@
 __pycache__/
 .vscode/
+.pythonlibs/
+.git/
+.upm/
+.replit
+replit.nix 
