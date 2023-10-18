@@ -1,4 +1,6 @@
 # Python-Queues
+Comments and doc strings were written using ChatGPT.
+
 Contains classes for these data structures:
 
 - Queues 
