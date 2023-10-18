@@ -14,8 +14,8 @@ from structures.stacks import Stack
 
 
 def get_integer_within_limits(text: str,
-                              lower_limit:int | None=None,
-                              upper_limit:int | None=None
+                              lower_limit: Union[int, None] = None,
+                              upper_limit: Union[int, None] = None
                               ) -> int:
     '''
     Obtain an integer input within optional limits.
